@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Portal</title>
+
+    <style>
+        .my-button {
+            position: absolute;
+            top: 150px;
+            left: 200px;
+        }
+
+        .my-button:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Student Portal</h1>
+
+    <label for="student-name">Student Name:</label>
+    <input type="text" id="student-name" name="student-name">
+
+    <br>
+    <br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+
+    <br>
+    <br>
+
+    <button type="button" class="my-button" onclick="login()">Login</button>
+
+    <script>
+        function login() {
+            alert("You are logged in!");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Catch me!</title>
+    <style>
+        #catchButton {
+            position: absolute;
+            top: 150px;
+            left: 200px;
+            z-index: 10;
+        }
+
+        iframe {
+            display: block;
+            width: 90%;
+            height: 500px;
+            opacity: 0.1;
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+	<h1>Catch me!</h1>
+
+	<p>
+		Score: <span id="score">0</span>
+	</p>
+
+	<button id="catchButton" onclick="changePos()">
+		Click Me
+	</button>
+    <button onclick="revealAttack()"> Reveal Hidden Page </button>
+
+    <iframe id="portal" src="portal.html" title="Portal"></iframe>
+    <script>
+        let score = 0;
+        let show = 0;
+
+        function revealAttack(){
+            if(show==0){
+            iframe.style.opacity = 0.5;
+            show = 1;
+        }
+            else{
+                iframe.style.opacity=0;
+                show = 0;
+            }
+            
+        }
+
+        function changePos(){
+            const button = document.getElementById("catchButton");
+            score++;
+            document.getElementById("score").textContent = score;
+            if(score<=4){
+                const maxLeft = window.innerWidth - button.offsetWidth;
+                const maxTop = window.innerHeight - button.offsetHeight;
+
+                button.style.left = Math.random() * maxLeft + "px";
+                button.style.top = Math.random() * maxTop + "px";
+            }else{
+                // after 4th attempt move the click me on top of the login in the iframe portal
+                const iframePosition = iframe.getBoundingClientRect();
+                const buttonPosition = loginButton.getBoundingClientRect();
+                const offset = 2;
+
+                button.style.top = iframePosition.top + buttonPosition.top + offset + "px";
+                button.style.left = iframePosition.left + buttonPosition.left + offset + "px";
+                // used .pointerEvents instead of z-index = -1 so it keeps "Click me" visible but the mouse click passes through
+                button.style.pointerEvents = "none";
+
+
+            }
+            
+            
+        }
+
+        const iframe = document.getElementById("portal");
+        let loginButton; 
+        iframe.addEventListener("load", function () {
+            loginButton = iframe.contentDocument.querySelector(".my-button");
+        });
+
+    </script>
+
+
+</body>
+
+</html>
