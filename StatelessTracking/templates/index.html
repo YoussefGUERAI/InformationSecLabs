@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Browser Fingerprinting Lab</title>
+</head>
+<body>
+    <h1>Browser Fingerprinting Lab</h1>
+    <p>The Flask server received this request.</p>
+
+    <h2>Active Feature Collection</h2>
+    <pre id="feature-output">Waiting for JavaScript...</pre>
+
+    <section aria-labelledby="fingerprint-heading">
+        <h2 id="fingerprint-heading">Fingerprint Identifier</h2>
+        <p>
+            The active features are combined in the displayed order and hashed with
+            SHA-256. Typing behaviour is deliberately excluded.
+        </p>
+        <p><strong>Canonical input:</strong></p>
+        <pre id="fingerprint-input">Waiting for JavaScript...</pre>
+        <p><strong>SHA-256 fingerprint:</strong></p>
+        <output id="fingerprint-output">Calculating...</output>
+        <p id="collection-status" aria-live="polite">
+            Waiting to send the fingerprint to Flask...
+        </p>
+    </section>
+
+    <section aria-labelledby="typing-heading">
+        <h2 id="typing-heading">Alice's Typing Rhythm</h2>
+
+        <p>Type this sentence exactly:</p>
+        <p id="target-sentence">Cookies are gone, but Alice's rhythm still leaves traces!</p>
+
+        <label for="typing-input">Your text:</label>
+        <input
+            id="typing-input"
+            type="text"
+            size="65"
+            autocomplete="off"
+            spellcheck="false"
+        >
+
+        <button id="restart-button" type="button">Restart</button>
+
+        <pre id="typing-results" aria-live="polite"></pre>
+    </section>
+
+    <script src="{{ url_for('static', filename='fingerprint.js') }}"></script>
+    <script src="{{ url_for('static', filename='fingerprint2.js') }}"></script>
+</body>
+</html>
